@@ -3,10 +3,11 @@
 This is a JavaScript implementation of the most common data structures used in programming.
 All these data structures can store unlimited amount of objects. Different data types can be stored in the same instance. Each has its own iterator, therefore they can be iterated over with a for... of loop.
 
-### [LinkedList](./linkedList.js)
+## [LinkedList](./linkedList.js)
 
-__Methods:__
+### Methods:
 
+### add
 ` add(item: any):void ` adds an item to the end of the list. 
 
  ```JavaScript
@@ -31,6 +32,8 @@ __Methods:__
   }
 
  ```
+ 
+### addAt 
 ` addAt(index: number, item: any):void ` adds an item to an specified position. Throws `Index out of bounds` if the specified index is out of range (index < 0 || index >= size()).
  ```JavaScript
 
@@ -41,7 +44,7 @@ __Methods:__
   }
   
  ```
-
+### remove
 `remove(index:number):any` removes item from a specified position in the list. Throws `This list is empty` if there are no items in the list. Throws `Index out of bounds` if the specified index is out of range (index < 0 || index >= size()).
 
  ```JavaScript
@@ -52,7 +55,7 @@ __Methods:__
 
   
  ```
-
+### removeFirst
 `removeFirst():any` removes the first item in the list. Throws `This list is empty` if there are no items in the list. 
 
 ```JavaScript
@@ -63,6 +66,8 @@ __Methods:__
 
   
  ```
+
+### removeLast
 `removeLast():any` removes the last item in the list. Throws `This list is empty` if there are no items in the list.
 
 ```JavaScript
@@ -73,7 +78,7 @@ __Methods:__
 
   
  ```
-
+### set
 `set(index: number, value: any):void` updates a specified item in the list. Throws `This list is empty` if there are no items in the list.
 
 ```JavaScript
@@ -89,7 +94,7 @@ __Methods:__
   }
  
  ```
-
+### size
 `size():number` returns the size of the list. 
 
 ```JavaScript
@@ -99,12 +104,13 @@ __Methods:__
   console.log(size) // 2
   
  ```
+<br>
 
+## [Queue](./queue.js)
 
-### [Queue](./queue.js)
+### Methods:
 
-__Methods:__
-
+### enqueue
 `enqueue(item:any):void` adds an item to the end of the queue. 
 
  ```JavaScript
@@ -128,6 +134,7 @@ __Methods:__
 
  ```
 
+### dequeue
 `dequeue():any` removes the first item in the queue. Throws `There are no items in the queue.` if the queue is empty.
 
 ```JavaScript
@@ -138,7 +145,8 @@ __Methods:__
   
 
  ```
- 
+
+### getIndexOf
  `getIndexOf(item:any):number` returns the index of a specified item. Throws `There are no items in the queue.` if the queue is empty. Throws `Not Found.` if the specified item is not in the queue.
  
  ```JavaScript
@@ -161,8 +169,8 @@ __Methods:__
   console.log(myQueue.getIndexOf(obj)); // 3   Here we are referring to the same object. Therefore; we get its index. 
 
  ```
- 
-  `peek():any` returns the first item of the queue, without removing it. Throws `There are no items in the queue.` if the queue is empty.
+### peek
+ `peek():any` returns the first item of the queue, without removing it. Throws `There are no items in the queue.` if the queue is empty.
  
  
  ```JavaScript
@@ -173,3 +181,74 @@ __Methods:__
   
 
  ```
+ 
+<br>
+
+## [Stack](./stack.js)
+
+### Methods:
+
+### push
+`push(item:any):void` adds an item on top of the stack. it is chainable.
+
+```JavaScript
+
+  const Stack = require('./stack');
+  
+  const myStack = new Stack();
+  
+  myStack.push({name: 'foo'}).push(35).push({name:'bar});
+  
+  for(let item of myStack){
+    console.log(item);    // {name: 'foo'}   35    {name:'bar}
+  }
+  
+```
+
+### pop
+`pop():any` removes and returns the item that is on top of the stack. Throws 'Stack is empty' if there are no items in the stack.
+
+```JavaScript
+
+  const deleted = myStack.pop();
+  
+  console.log(deleted)  // {name: 'foo'}
+  
+```
+### peek
+`peek():any` returns the item that is on top of the stack, without removing it. Throws 'Stack is empty' if there are no items in the stack.
+
+```JavaScript
+
+  const top = myStack.pop();
+  
+  console.log(top)  // 35
+  
+```
+
+### isEmpty 
+`isEmpty():boolean` returns true if the stack is empty, returns false otherwise. 
+
+
+```JavaScript
+
+  myStack.isEmpty(); // true   ||   false
+  
+  
+```
+
+### search
+`search(item:any):number` returns the index of a specified item.  Throws 'Stack is empty' if there are no items in the stack. Throws 'Not found.' if the specified object is not in the stack.
+
+```JavaScript
+
+  myStack.search(35); // 0
+  
+  
+```
+ > Note: Objects are compared by reference and not by value. 
+
+
+
+
+
