@@ -13,13 +13,13 @@ Stack.prototype = {
         return this;
     },
     pop: function(){
-        if(!this._head) throw new Error('There are no items in the stack.');
+        if(!this._head) throw new Error('Stack is empty');
         let prev = this._head;
         this._head = this._head.next;
         return prev.value;
     },
     peek: function(){
-        if(!this._head) throw new Error('There are no items in the stack.');
+        if(!this._head) throw new Error('Stack is empty');
         return this._head.value;
     },
     isEmpty: function(){
@@ -30,7 +30,7 @@ Stack.prototype = {
         }
     },
     search:function(item){
-        if(!this._head) throw new Error('There are no items in the stack.');
+        if(!this._head) throw new Error('Stack is empty');
         let currentNode = this._head;
         let i = 0;
         while(currentNode.next){
