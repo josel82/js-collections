@@ -42,7 +42,7 @@ __Methods:__
   
  ```
 
-`remove(index:number):any` removes item from a specified position in the list and returns it. Throws `This list is empty` if there are no items in the list. Throws `Index out of bounds` if the specified index is out of range (index < 0 || index >= size()).
+`remove(index:number):any` removes item from a specified position in the list. Throws `This list is empty` if there are no items in the list. Throws `Index out of bounds` if the specified index is out of range (index < 0 || index >= size()).
 
  ```JavaScript
 
@@ -53,7 +53,7 @@ __Methods:__
   
  ```
 
-`removeFirst():any` removes the first item in the list and returns it. Throws `This list is empty` if there are no items in the list. 
+`removeFirst():any` removes the first item in the list. Throws `This list is empty` if there are no items in the list. 
 
 ```JavaScript
 
@@ -63,7 +63,7 @@ __Methods:__
 
   
  ```
-`removeLast():any` removes the last item in the list and returns it. Throws `This list is empty` if there are no items in the list.
+`removeLast():any` removes the last item in the list. Throws `This list is empty` if there are no items in the list.
 
 ```JavaScript
 
@@ -101,3 +101,75 @@ __Methods:__
  ```
 
 
+### [Queue](./queue.js)
+
+__Methods:__
+
+`enqueue(item:any):void` adds an item to the end of the queue. 
+
+ ```JavaScript
+
+  const Queue = require('./queue');
+
+  const myQueue = new Queue();
+
+  myQueue.enqueue({key:'value'});
+
+ ```
+ multiple calls of these method can be chained as shown in the example below:
+ 
+ ```JavaScript
+
+  myQueue.enqueue('bar').enqueue('foo').enqueue(33);
+    
+  for(let item of myQueue){
+    console.log(item); // {key:'value'}  bar  foo  33
+  }
+
+ ```
+
+`dequeue():any` removes the first item in the queue. Throws `There are no items in the queue.` if the queue is empty.
+
+```JavaScript
+
+  const deleted = myQueue.dequeue();
+  
+  console.log(deleted); // {key:'value'} 
+  
+
+ ```
+ 
+ `getIndexOf(item:any):number` returns the index of a specified item. Throws `There are no items in the queue.` if the queue is empty. Throws `Not Found.` if the specified item is not in the queue.
+ 
+ ```JavaScript
+
+  const index = myQueue.getIndexOf(33);
+  
+  console.log(index); // 2 
+  
+
+ ```
+ > Note: Objects are compared by reference and not by value. 
+ 
+  ```JavaScript
+  const obj = {foo: 'bar'};
+  
+  myQueue.enqueue(obj);   //first we add a new object to the queue
+  
+  console.log(myQueue.getIndexOf({foo: 'bar'})); //This will throw Not Found. error because even though it has the same value, this object we are passing as argument is not the same object that was stored in the queue.
+  
+  console.log(myQueue.getIndexOf(obj)); // 3   Here we are referring to the same object. Therefore; we get its index. 
+
+ ```
+ 
+  `peek():any` returns the first item of the queue, without removing it. Throws `There are no items in the queue.` if the queue is empty.
+ 
+ 
+ ```JavaScript
+
+  const firstItem = myQueue.peek();
+  
+  console.log(firstItem); // bar 
+  
+
+ ```
