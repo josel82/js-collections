@@ -1,32 +1,34 @@
 
-function Queue(){};
-
-Queue.prototype =  {
-     enqueue: function(value){
-        let prev = this.tail;
-        this.tail = {
+module.exports = function Queue(){
+    let head;
+    let tail;
+    this.enqueue = function(value){
+        let prev = tail;
+        tail = {
             value
         }
         if(prev){
-            prev.next = this.tail;
+            prev.next = tail;
         }else{
-            this.head = this.tail;
+            head = tail;
         }
         return this;
-    },
-    dequeue: function(){
-        if(!this.head){
+    };
+    
+    this.dequeue = function(){
+        if(!head){
             throw new Error('There are no items in the queue.');
         }else{
-            let prev = this.head;
-            this.head = this.head.next;
+            let prev = head;
+            head = head.next;
             return prev.value;
         }
-    },
-    getIndexOf: function(item){
+    }
 
-        if(!this.head) throw new Error('There are no items in the queue.');
-        let currentNode = this.head;
+    this.getIndexOf = function(item){
+
+        if(!head) throw new Error('There are no items in the queue.');
+        let currentNode = head;
         let i = 0;
         while(currentNode.next){
             if(currentNode.value === item) return i;
@@ -38,13 +40,22 @@ Queue.prototype =  {
         }else{
             throw new Error('Not Found.');
         }
-    },
-    peek: function(){
-        if(!this.head) throw new Error('There are no items in the queue.');
-        return this.head.value;
-    },
-    [Symbol.iterator]: function*(){ //Generator
-        let current = this.head;
+    };
+
+    this.peek = function(){
+        if(!head) throw new Error('There are no items in the queue.');
+        return {...head}.value;
+    }
+
+    this.getHead = function(){
+        return {...head};
+    }
+    this.getTail = function(){
+        return {...tail};
+    }
+
+    this[Symbol.iterator] = function*(){ //Generator
+        let current = head;
         while(true){
             if(!current) return
             let {value} = current;
@@ -52,6 +63,4 @@ Queue.prototype =  {
             yield value;
         }
     }
-}
-
-module.exports = Queue;
+};
