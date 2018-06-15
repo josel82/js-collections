@@ -197,10 +197,10 @@ All these data structures can store unlimited amount of objects. Different data 
   
   const myStack = new Stack();
   
-  myStack.push({name: 'foo'}).push(35).push({name:'bar});
+  myStack.push({name: 'foo'}).push(35).push({name:'bar'});
   
   for(let item of myStack){
-    console.log(item);    // {name: 'foo'}   35    {name:'bar}
+    console.log(item);    // {name: 'foo'}   35    {name:'bar'}
   }
   
 ```
