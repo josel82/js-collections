@@ -1,5 +1,6 @@
 
-function Stack(){
+
+module.exports = function Stack(){
     var head;
 
     this.push = function(value){
@@ -52,19 +53,14 @@ function Stack(){
     this.getHead = function (){
         return {...head};
     };
-    this[Symbol.iterator] = function(){
+    this[Symbol.iterator] = function*(){
         let current = head;
-        return {
-            next: function(){
-                if(!current) return {done:true}
-                let {value} = current;
-                current = current.next;
-                return {value};
-            }
+        while(true){
+            if(!current) return 
+            let {value} = current;
+            current = current.next;
+            yield value;
         }
-    }
+    };
 
 }
-
-
-module.exports = Stack;
