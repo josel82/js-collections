@@ -11,23 +11,23 @@ describe('Queue', ()=>{
         testQueue.enqueue(head);
     });
 
-    describe('enqueue', ()=>{
+    context('enqueue', ()=>{
         it('shoud add a new item and this should be both the head and the tail',()=>{
         
-            expect(testQueue.head.value).to.equal(head);
-            expect(testQueue.tail.value).to.equal(head);
+            expect(testQueue.getHead().value).to.equal(head);
+            expect(testQueue.getTail().value).to.equal(head);
         });
 
         it('should add new item at the end of the queue',()=>{
             const newItem = {name: 'Manuel'};
             testQueue.enqueue(newItem);
-            expect(testQueue.tail.value).to.equal(newItem);
-            expect(testQueue.head.next.value).to.equal(newItem);
-            expect(testQueue.head.value).not.to.equal(newItem);
+            expect(testQueue.getTail().value).to.equal(newItem);
+            expect(testQueue.getHead().next.value).to.equal(newItem);
+            expect(testQueue.getHead().value).not.to.equal(newItem);
         });
     });
 
-    describe('dequeue',()=>{
+    context('dequeue',()=>{
         it('should remove the first item of the queue and let the next item become the new head', ()=>{
             const item2 = {name: 'Manuel'};
             const item3 = {name: 'April'};
@@ -35,7 +35,7 @@ describe('Queue', ()=>{
 
             const del = testQueue.dequeue();
             expect(del).to.equal(head);
-            expect(item2).to.equal(testQueue.head.value);
+            expect(item2).to.equal(testQueue.getHead().value);
 
         });
         it('should throw an error if there are no items in the queue', ()=>{
@@ -45,7 +45,7 @@ describe('Queue', ()=>{
         });
     });
 
-    describe('getIndexOf', ()=>{
+    context('getIndexOf', ()=>{
         it('should find the object and return its index', ()=>{
             const item2 = {name: 'Manuel'};
             const item3 = {name: 'April'};
@@ -69,7 +69,7 @@ describe('Queue', ()=>{
         });
 
     });
-    describe('peek', ()=>{
+    context('peek', ()=>{
         it('should return the first item in the queue',()=>{
             const item2 = {name: 'Manuel'};
             const item3 = {name: 'April'};
@@ -78,14 +78,14 @@ describe('Queue', ()=>{
         });
         it('should throw an exception if there are no items in the queue', ()=>{
             const newQueue = new Queue();
-            expect(testQueue.peek).to.throw(Error);
-            expect(testQueue.peek).to.throw('There are no items in the queue.');
+            expect(newQueue.peek).to.throw(Error);
+            expect(newQueue.peek).to.throw('There are no items in the queue.');
         });
     });
-    describe('Iterator', ()=>{
+    context('Iterator', ()=>{
         it('should return next item', ()=>{
-            const item2 = {name: 'Manuel'};
-            const item3 = {name: 'April'};
+            const item2 = {name: 'foo'};
+            const item3 = {name: 'bar'};
             testQueue.enqueue(item2).enqueue(item3);
             const iterator = testQueue[Symbol.iterator]();
             expect(iterator.next().value).to.equal(head);

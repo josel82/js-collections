@@ -95,5 +95,20 @@ describe('Stack', ()=>{
             expect(testStack.search.bind(testStack, 'test')).to.throw('Not found.');
         });
     });
+
+    context('Iterator', ()=>{
+        const item1 = {name: 'foo'};
+        const item2 = 20;
+        const item3 = 'bar'
+        it('should return next item', ()=>{
+            testStack = new Stack();
+            testStack.push(item1).push(item2).push(item3);
+            const iterator = testStack[Symbol.iterator]();
+            expect(iterator.next().value).to.equal(item3);
+            expect(iterator.next().value).to.equal(item2);
+            expect(iterator.next().value).to.equal(item1);
+            expect(iterator.next()).to.deep.equal({value:undefined, done:true});
+        });
+    });
 });
 

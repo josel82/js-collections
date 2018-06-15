@@ -6,7 +6,7 @@ let testList;
 
 describe('LinkedList', () => {
 
-    describe('Adding Items', () => {
+    context('Adding Items', () => {
         const item1 = {name: 'Jose'};
         const item2 = 20;
         const item3 = 'This is a test'
@@ -14,24 +14,24 @@ describe('LinkedList', () => {
             testList = new LinkedList();
             testList.add(item1);
         });
-        describe('add', ()=>{
+        context('add', ()=>{
             it('should add an item to the end of the list', () => {
 
-                expect(testList._head.value).to.be.an('object');
-                expect(testList._head.value).to.equal(item1);
-                expect(testList._tail.value).to.equal(item1);
+                expect(testList.getHead().value).to.be.an('object');
+                expect(testList.getHead().value).to.equal(item1);
+                expect(testList.getTail().value).to.equal(item1);
             });    
         });
-        describe('addAt', ()=>{
+        context('addAt', ()=>{
             it('should add an item at an specific position', () => {
                 
                 testList.addAt(0, item2).addAt(1, item3);
-                expect(testList._head.value).to.be.a('number');
-                expect(testList._head.value).to.equal(20);
-                expect(testList._head.next.value).to.be.a('string');
-                expect(testList._head.next.value).to.equal(item3);
-                expect(testList._head.next.next.value).to.be.a('object');
-                expect(testList._head.next.next.value).to.equal(item1);
+                expect(testList.getHead().value).to.be.a('number');
+                expect(testList.getHead().value).to.equal(20);
+                expect(testList.getHead().next.value).to.be.a('string');
+                expect(testList.getHead().next.value).to.equal(item3);
+                expect(testList.getHead().next.next.value).to.be.a('object');
+                expect(testList.getHead().next.next.value).to.equal(item1);
             });
             it('should throw error if the index is out of bounds', ()=>{
                 expect(testList.addAt.bind(testList, 3, item2)).to.throw(Error);
@@ -40,7 +40,7 @@ describe('LinkedList', () => {
         });
     });
 
-    describe('Removing Items', () => {
+    context('Removing Items', () => {
 
         const item1 = {name: 'Jose'};
         const item2 = 20;
@@ -50,23 +50,23 @@ describe('LinkedList', () => {
             testList = new LinkedList();
             testList.add(item1).add(item2).add(item3);
         });
-        describe('remove', () => {
+        context('remove', () => {
 
             it('should delete item at an specified position', () => {
 
                 const deleted = testList.remove(1);
                 expect(deleted).to.be.a('number');
                 expect(deleted).to.equal(item2);
-                expect(testList._head.next.value).to.be.a('string');
-                expect(testList._head.next.value).to.equal(item3);
+                expect(testList.getHead().next.value).to.be.a('string');
+                expect(testList.getHead().next.value).to.equal(item3);
             });
             it('should remove the head of the list', () => {
 
                 const deleted = testList.remove(0);
                 expect(deleted).to.be.a('object');
                 expect(deleted).to.equal(item1);
-                expect(testList._head.value).to.be.a('number');
-                expect(testList._head.value).to.equal(item2);
+                expect(testList.getHead().value).to.be.a('number');
+                expect(testList.getHead().value).to.equal(item2);
             });
 
             it('should throw error if the list is empty', () => {
@@ -82,14 +82,14 @@ describe('LinkedList', () => {
             });
         });
 
-        describe('removeFirst', () => {
+        context('removeFirst', () => {
             it('should remove the first item from the list and return it', () => {
 
                 const deleted = testList.removeFirst();
                 expect(deleted).to.be.a('object');
                 expect(deleted).to.equal(item1);
-                expect(testList._head.value).to.be.a('number');
-                expect(testList._head.value).to.equal(item2);
+                expect(testList.getHead().value).to.be.a('number');
+                expect(testList.getHead().value).to.equal(item2);
             });
             it('should throw error if the list is empty', () => {
                 const emptyList = new LinkedList();
@@ -98,14 +98,14 @@ describe('LinkedList', () => {
             });
         });
 
-        describe('removeLast', () => {
+        context('removeLast', () => {
             it('should remove the last item of the list', () => {
                 const deleted = testList.removeLast();
                 expect(deleted).to.be.a('string');
                 expect(deleted).to.equal(item3);
-                expect(testList._tail.value).to.be.a('number');
-                expect(testList._tail.value).to.equal(item2);
-                expect(testList._head.next.value).to.equal(item2);
+                expect(testList.getTail().value).to.be.a('number').to.equal(item2);
+                expect(testList.getHead().value).to.be.an('object').to.equal(item1);
+                expect(testList.getHead().next.value).to.equal(item2);
             });
             it('should throw error if the list is empty', () => {
                 const emptyList = new LinkedList();
@@ -115,7 +115,7 @@ describe('LinkedList', () => {
         });
     });
 
-    describe('set', ()=>{
+    context('set', ()=>{
         const item1 = {name: 'Jose'};
         const item2 = 20;
         const item3 = 'This is a test'
@@ -126,8 +126,8 @@ describe('LinkedList', () => {
         });
         it('should update a specified item in the list', ()=>{
             testList.set(1, newItem);
-            expect(testList._head.next.value).to.be.an('object');
-            expect(testList._head.next.value).to.equal(newItem);
+            expect(testList.getHead().next.value).to.be.an('object');
+            expect(testList.getHead().next.value).to.equal(newItem);
         });
         it('should throw error if the index is out of bounds', ()=>{
             expect(testList.set.bind(testList, 6, newItem)).to.throw(Error);
@@ -136,10 +136,10 @@ describe('LinkedList', () => {
         });
     });
 
-    describe('size', ()=>{
-        const item1 = {name: 'Jose'};
+    context('size', ()=>{
+        const item1 = {name: 'foo'};
         const item2 = 20;
-        const item3 = 'This is a test'
+        const item3 = 'bar'
 
         it('should return the size of the list', ()=>{
             testList = new LinkedList();
@@ -151,6 +151,21 @@ describe('LinkedList', () => {
         it('should return 0 if the list is empty', ()=>{
             let emptyList = new LinkedList();
             expect(emptyList.size()).to.equal(0);
+        });
+    });
+
+    context('Iterator', ()=>{
+        const item1 = {name: 'foo'};
+        const item2 = 20;
+        const item3 = 'bar'
+        it('should return next item', ()=>{
+            testList = new LinkedList();
+            testList.add(item1).add(item2).add(item3);
+            const iterator = testList[Symbol.iterator]();
+            expect(iterator.next().value).to.equal(item1);
+            expect(iterator.next().value).to.equal(item2);
+            expect(iterator.next().value).to.equal(item3);
+            expect(iterator.next()).to.deep.equal({value:undefined, done:true});
         });
     });
 
