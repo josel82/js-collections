@@ -1,22 +1,24 @@
 
 
-function LinkedList(){}
+module.exports = function LinkedList(){
+    let head;
+    let tail;
 
-LinkedList.prototype = {
-    add: function(value){
-        let prev = this._tail;
-        this._tail = {
+    this.add = function(value){
+        let prev = tail;
+        tail = {
             value
         }
         if(prev){
-            prev.next = this._tail;
+            prev.next = tail;
         }else{
-            this._head = this._tail;
+            head = tail;
         }
         return this;
-    },
-    addAt: function(pos,value){
-        let currentNode = this._head;
+    }
+
+    this.addAt = function(pos,value){
+        let currentNode = head;
         let prev;
         const newNode = {value}
         for(let i = 0; i< pos && currentNode; i++){
@@ -27,7 +29,7 @@ LinkedList.prototype = {
             this.add(value);
         }else if(pos === 0 && currentNode){
             newNode.next = currentNode;
-            this._head = newNode;
+            head = newNode;
         }else if(!currentNode || pos < 0){
             throw new Error('Index out of bounds.');
         }else{        
@@ -36,18 +38,19 @@ LinkedList.prototype = {
         }
 
         return this;
-    },
-    remove:function(pos){
-        if(!this._head) throw new Error('This list is empty.');
-        let currentNode = this._head;
+    }
+
+    this.remove = function(pos){
+        if(!head) throw new Error('This list is empty.');
+        let currentNode = head;
         
         for(let i = 0; i < pos-1 && currentNode.next; i++){
             currentNode = currentNode.next;
         }
         
         if(pos === 0){
-            let holder = this._head;
-            this._head = this._head.next;
+            let holder = head;
+            head = head.next;
             return holder.value;
         }else{
             if(!currentNode.next || pos < 0){
@@ -57,27 +60,30 @@ LinkedList.prototype = {
             currentNode.next = currentNode.next.next;
             return holder.value;
         }
-    },
-    removeFirst:function(){
-        if(!this._head) throw new Error('This list is empty.');
-        let holder = this._head;
-        this._head = this._head.next;
+    }
+
+    this.removeFirst = function(){
+        if(!head) throw new Error('This list is empty.');
+        let holder = head;
+        head = head.next;
         return holder.value;
-    },
-    removeLast:function(){
-        if(!this._head) throw new Error('This list is empty.');
-        let current = this._head;
+    }
+
+    this.removeLast = function(){
+        if(!head) throw new Error('This list is empty.');
+        let current = head;
         let prev;
         while(current.next){
             prev = current;
             current = current.next;
         }
         prev.next = null;
-        this._tail = prev;
+        tail = prev;
         return current.value;
-    },
-    set:function(pos, value){
-        let current = this._head;
+    }
+
+    this.set = function(pos, value){
+        let current = head;
         let prev;
         let newNode = {value};
         for(let i = 0; i < pos && current; i++){
@@ -90,29 +96,35 @@ LinkedList.prototype = {
         }
         newNode.next = current.next;
         prev.next = newNode;    
-    },
-    size:function(){
-        if(!this._head) return 0;
-        let currentNode = this._head;
+    };
+
+    this.size = function(){
+        if(!head) return 0;
+        let currentNode = head;
         let index = 0;
         while(currentNode.next){
             currentNode = currentNode.next;
             index++;
         }
         return index+1;
-    },
-    [Symbol.iterator]: function(){
-        let current = this._head;
-        return {
-            next: function(){
-                if(!current) return {done:true}
-                let {value} = current;
-                current = current.next;
-                return {value};
-            }
+    };
+
+    this.getHead = function (){
+        return {...head};
+    };
+
+    this.getTail = function (){
+        return {...tail};
+    };
+
+    this[Symbol.iterator] = function*(){
+        let current = head;
+        while(true){
+            if(!current) return
+            let {value} = current;
+            current = current.next;
+            yield value;
         }
     }
+
 }
-
-
-module.exports = LinkedList;
