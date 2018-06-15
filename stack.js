@@ -1,37 +1,41 @@
 
-function Stack(){}
+function Stack(){
+    var head;
 
-Stack.prototype = {
-    push: function(value){
-        let prev = this._head;
-        this._head = {
+    this.push = function(value){
+        let prev = head;
+        head = {
             value
         }
         if(prev){
-           this._head.next = prev;
+           head.next = prev;
         }
         return this;
-    },
-    pop: function(){
-        if(!this._head) throw new Error('Stack is empty');
-        let prev = this._head;
-        this._head = this._head.next;
+    };
+
+    this.pop = function(){
+        if(!head) throw new Error('Stack is empty');
+        let prev = head;
+        head = head.next;
         return prev.value;
-    },
-    peek: function(){
-        if(!this._head) throw new Error('Stack is empty');
-        return this._head.value;
-    },
-    isEmpty: function(){
-        if(!this._head) {
+    };
+
+    this.peek = function(){
+        if(!head) throw new Error('Stack is empty');
+        return {...head}.value;
+    };
+
+    this.isEmpty = function(){
+        if(!head) {
             return true;
         } else {
             return false;
         }
-    },
-    search:function(item){
-        if(!this._head) throw new Error('Stack is empty');
-        let currentNode = this._head;
+    };
+
+    this.search = function(item){
+        if(!head) throw new Error('Stack is empty');
+        let currentNode = head;
         let i = 0;
         while(currentNode.next){
             if(currentNode.value === item) return i;
@@ -43,9 +47,13 @@ Stack.prototype = {
         }else{
             throw Error('Not found.');
         }
-    },
-    [Symbol.iterator]: function(){
-        let current = this._head;
+    };
+
+    this.getHead = function (){
+        return {...head};
+    };
+    this[Symbol.iterator] = function(){
+        let current = head;
         return {
             next: function(){
                 if(!current) return {done:true}
@@ -55,6 +63,7 @@ Stack.prototype = {
             }
         }
     }
+
 }
 
 

@@ -15,10 +15,10 @@ describe('Stack', ()=>{
         it('should add an item to the top of the stack', ()=>{
             
             testStack.push({name: 'foo'});
-            expect(testStack._head.value).to.be.an('object').to.deep.equal({name: 'foo'});
+            expect(testStack.getHead().value).to.be.an('object').to.deep.equal({name: 'foo'});
             testStack.push({name:'bar'});
-            expect(testStack._head.value).to.be.an('object').to.deep.equal({name: 'bar'});
-            expect(testStack._head.next.value).to.be.an('object').to.deep.equal({name: 'foo'});
+            expect(testStack.getHead().value).to.be.an('object').to.deep.equal({name: 'bar'});
+            expect(testStack.getHead().next.value).to.be.an('object').to.deep.equal({name: 'foo'});
         });
 
     });
@@ -31,9 +31,9 @@ describe('Stack', ()=>{
         it('should remove and return the item on top of the stack', ()=>{
             testStack.push({name: 'foo'}).push({name:'bar'}).push('I am a string');
             expect(testStack.pop()).to.be.a('string').to.equal('I am a string');
-            expect(testStack._head.value).to.be.an('object').to.deep.equal({name: 'bar'});
-            expect(testStack._head.next.value).to.be.an('object').to.deep.equal({name: 'foo'});
-            expect(testStack._head.next.next).to.not.exist; 
+            expect(testStack.getHead().value).to.be.an('object').to.deep.equal({name: 'bar'});
+            expect(testStack.getHead().next.value).to.be.an('object').to.deep.equal({name: 'foo'});
+            expect(testStack.getHead().next.next).to.not.exist; 
         });
 
         it('should throw error if the stack is empty', ()=>{
@@ -50,10 +50,10 @@ describe('Stack', ()=>{
         it('should return the item on top of the stack without removing it', ()=>{
             testStack.push({name: 'foo'}).push({name:'bar'}).push('I am a string');
             expect(testStack.peek()).to.be.a('string').to.equal('I am a string');
-            expect(testStack._head.value).to.be.a('string').to.equal('I am a string');
-            expect(testStack._head.next.value).to.be.an('object').to.deep.equal({name: 'bar'});
-            expect(testStack._head.next.next.value).to.be.an('object').to.deep.equal({name: 'foo'});
-            expect(testStack._head.next.next.next).to.not.exist;
+            expect(testStack.getHead().value).to.be.a('string').to.equal('I am a string');
+            expect(testStack.getHead().next.value).to.be.an('object').to.deep.equal({name: 'bar'});
+            expect(testStack.getHead().next.next.value).to.be.an('object').to.deep.equal({name: 'foo'});
+            expect(testStack.getHead().next.next.next).to.not.exist;
         });
     });
     context('isEmpty', ()=>{
@@ -97,12 +97,3 @@ describe('Stack', ()=>{
     });
 });
 
-//=================== chai ===================
-//to.deep.equal() for assering properties of objects
-//methods can be chained like so -> expect({name:'foo}).to.have.property('name').to.equal('foo');
-//asserting a result is null -> expect(null).to.be.null;
-//asserting a result is undefined -> expect(undefined).to.not.exist;
-//asserting that something exists -> expect(3).to.exist;
-
-
-//cross-env
