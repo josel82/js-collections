@@ -49,11 +49,12 @@ describe('Queue', ()=>{
         it('should find the object and return its index', ()=>{
             const item2 = {name: 'Manuel'};
             const item3 = {name: 'April'};
-            testQueue.enqueue(item2).enqueue(item3);
+            testQueue.enqueue(item2).enqueue(item3).enqueue(22);
 
             expect(testQueue.getIndexOf(head)).to.equal(0);
             expect(testQueue.getIndexOf(item2)).to.equal(1);
             expect(testQueue.getIndexOf(item3)).to.equal(2);
+            expect(testQueue.getIndexOf(22)).to.equal(3);
         });
         it('should throw an error if there are no items in the queue', ()=>{
             const newQueue = new Queue();

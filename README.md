@@ -42,7 +42,7 @@ __Methods:__
   
  ```
 
-`remove(index:number):any` removes item from a specified position in the list. Throws `This list is empty` if there are no items in the list. Throws `Index out of bounds` if the specified index is out of range (index < 0 || index >= size()).
+`remove(index:number):any` removes item from a specified position in the list and returns it. Throws `This list is empty` if there are no items in the list. Throws `Index out of bounds` if the specified index is out of range (index < 0 || index >= size()).
 
  ```JavaScript
 
@@ -53,7 +53,7 @@ __Methods:__
   
  ```
 
-`removeFirst():any` removes the first item in the list. Throws `This list is empty` if there are no items in the list. 
+`removeFirst():any` removes the first item in the list and returns it. Throws `This list is empty` if there are no items in the list. 
 
 ```JavaScript
 
@@ -63,7 +63,7 @@ __Methods:__
 
   
  ```
-`removeLast():any` removes the last item in the list. Throws `This list is empty` if there are no items in the list.
+`removeLast():any` removes the last item in the list and returns it. Throws `This list is empty` if there are no items in the list.
 
 ```JavaScript
 
